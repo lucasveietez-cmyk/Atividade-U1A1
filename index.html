@@ -34,79 +34,88 @@
           <h1 class='header adjust-top center orange-text'>Busca por CEP</h1>
           <div class='row center'>
             <h5 class='header adjust-top col s12 light'>Preencha o CEP para autocompletar</h5>
-            
+
             <div class='input-field col s12 m6 l3'>
               <i class='material-icons prefix'>account_circle</i>
               <input id='cep' type='text' class='validate' onblur='buscarCep()'>
               <label for='cep'>CEP</label>
             </div>
-            
+
             <div class='input-field col s12 m6 l3'>
               <i class='material-icons prefix'>location_city</i>
               <input id='cidade' type='text' class='validate active' readonly>
               <label for='cidade'>Cidade</label>
             </div>
-            
+
             <div class='input-field col s12 m6 l3'>
               <i class='material-icons prefix'>location_on</i>
               <input id='bairro' type='text' class='validate active' readonly>
               <label for='bairro'>Bairro</label>
             </div>
-            
+
             <div class='input-field col s12 m6 l3'>
               <i class='material-icons prefix'>map</i>
               <input id='estado' type='text' class='validate active' readonly>
               <label for='estado'>Estado</label>
             </div>
-            
+
             <div class='input-field col s12 m6 l3'>
               <i class='material-icons prefix'>local_phone</i>
               <input id='ddd' type='text' class='validate active' readonly>
               <label for='ddd'>DDD</label>
             </div>
 
-            <a onclick='buscarCep()' class='waves-effect waves-light btn-small'><i class='material-icons left'>search</i>Buscar</a>
-            <a onclick='limparCamposCep()' class='waves-effect waves-light btn-small'><i class='material-icons left'>clear</i>Limpar</a>
+            <a onclick='buscarCep()' class='waves-effect waves-light btn-small'><i
+                class='material-icons left'>search</i>Buscar</a>
+            <a onclick='limparCamposCep()' class='waves-effect waves-light btn-small orange'><i
+                class='material-icons left'>clear</i>Limpar</a>
           </div>
         </div>
 
         <div id='rua-tab' class='col s12'>
           <h1 class='header adjust-top center orange-text'>Busca por Rua</h1>
           <div class='row center'>
-            <h5 class='header adjust-top col s12 light'>Consulte localidades informando UF, Cidade e Logradouro</h5>
-            
+            <h5 class='header adjust-top col s12 light'>Consulte localidades informando UF, Cidade e Rua</h5>
+
             <div class='input-field col s12 m8 offset-m2'>
               <select id='uf-rua' onchange='carregarCidades()'>
                 <option value='' disabled selected>Selecione o Estado</option>
               </select>
               <label>UF</label>
             </div>
-            
+
             <div class='input-field col s12 m8 offset-m2'>
               <select id='cidade-rua'>
                 <option value='' disabled selected>Selecione a Cidade</option>
               </select>
-              <label>MunicÃ­pio</label>
+              <label>Municipio</label>
             </div>
-            
+
             <div class='input-field col s12 m8 offset-m2'>
               <input id='rua' type='text' class='validate'>
-              <label for='rua'>Logradouro (Rua)</label>
+              <label for='rua'>Rua</label>
             </div>
 
             <div class='col s12 m8 offset-m2' style='margin-top: 20px;'>
-              <a onclick='buscarRua()' class='waves-effect waves-light btn'><i class='material-icons left'>search</i>Buscar</a>
+              <a onclick='buscarRua()' class='waves-effect waves-light btn'><i
+                  class='material-icons left'>search</i>Buscar</a>
+              <a onclick='limparCamposRua()' class='waves-effect waves-light btn-small orange'><i
+                  class='material-icons left'>clear</i>Limpar</a>
             </div>
           </div>
 
           <ul id='lista-ruas' class='collection'>
-            </ul>
+          </ul>
         </div>
 
         <div id='log-tab' class='col s12'>
-           <h1 class='header adjust-top center orange-text'>Registro de Atividades</h1>
-           <ul id='lista-logs' class='collection'>
-             </ul>
+          <h1 class='header adjust-top center orange-text'>Registro de Atividades</h1>
+          <div class='center' style='margin-bottom: 20px;'>
+            <a onclick='limparHistorico()' class='waves-effect waves-light btn-small red'><i
+                class='material-icons left'>delete_sweep</i>Limpar Logs</a>
+          </div>
+          <ul id='lista-logs' class='collection'>
+          </ul>
         </div>
       </div>
     </div>
