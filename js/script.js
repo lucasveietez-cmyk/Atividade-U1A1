@@ -1,9 +1,10 @@
 // Inicialização de componentes e carregamento prévio de dados
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const tabs = document.querySelectorAll('.tabs');
   M.Tabs.init(tabs);
-  
+
   carregarEstados();
+  carregarLogsSalvos();
   iniciarServiceWorker();
 });
 
@@ -12,16 +13,37 @@ function registrarLog(mensagem) {
   const listaLogs = document.getElementById('lista-logs');
   const momentoAtual = new Date().toLocaleString('pt-BR');
   const elementoLista = document.createElement('li');
-  
+
   elementoLista.className = 'collection-item';
   elementoLista.textContent = `[${momentoAtual}] ${mensagem}`;
   listaLogs.prepend(elementoLista);
+
+  const logsSalvos = JSON.parse(localStorage.getItem('historico_logs') || '[]');
+  logsSalvos.unshift({ data: momentoAtual, texto: mensagem });
+  localStorage.setItem('historico_logs', JSON.stringify(logsSalvos.slice(0, 50)));
+}
+
+function carregarLogsSalvos() {
+  const logsSalvos = JSON.parse(localStorage.getItem('historico_logs') || '[]');
+  const listaLogs = document.getElementById('lista-logs');
+  listaLogs.innerHTML = '';
+  logsSalvos.reverse().forEach(log => {
+    const elementoLista = document.createElement('li');
+    elementoLista.className = 'collection-item';
+    elementoLista.textContent = `[${log.data}] ${log.texto}`;
+    listaLogs.prepend(elementoLista);
+  });
+}
+
+function limparHistorico() {
+  localStorage.removeItem('historico_logs');
+  document.getElementById('lista-logs').innerHTML = '';
 }
 
 // Lógica de busca pelo CEP
 async function buscarCep() {
   const campoCep = document.getElementById('cep').value.replace(/\D/g, '');
-  
+
   if (campoCep.length !== 8) return;
 
   try {
@@ -52,6 +74,22 @@ function limparCamposCep() {
   document.getElementById('estado').value = '';
   document.getElementById('ddd').value = '';
   M.updateTextFields();
+}
+
+function limparCamposRua() {
+  document.getElementById('uf-rua').value = '';
+  document.getElementById('cidade-rua').value = '';
+  document.getElementById('rua').value = '';
+
+  document.getElementById('lista-ruas').innerHTML = '';
+
+  M.updateTextFields();
+
+  const seletorUf = document.getElementById('uf-rua');
+  const seletorCidade = document.getElementById('cidade-rua');
+
+  M.FormSelect.init(seletorUf);
+  M.FormSelect.init(seletorCidade);
 }
 
 // Integração com a API do IBGE para listagem de Estados
@@ -106,7 +144,7 @@ async function buscarRua() {
   const nomeRua = document.getElementById('rua').value;
 
   if (!siglaUf || !nomeCidade || nomeRua.length < 3) {
-    registrarLog('Atenção: Informe a UF, a Cidade e ao menos 3 caracteres no Logradouro.');
+    registrarLog('Atenção: Informe a UF, a Cidade e ao menos 3 caracteres da Rua.');
     return;
   }
 
@@ -130,7 +168,7 @@ async function buscarRua() {
 
     registrarLog(`Busca textual concluída: ${nomeRua}, ${nomeCidade} - ${siglaUf}.`);
   } catch (excecao) {
-    registrarLog('Erro de rede ao processar a busca por logradouro.');
+    registrarLog('Erro de rede ao processar a busca por Rua.');
   }
 }
 
