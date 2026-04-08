@@ -1,149 +1,121 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='pt-BR'>
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
-  <title>Busca CEP</title>
+  <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1.0' />
+  <title> Meu Busca CEP </title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection" />
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+  <link rel='manifest' href='manifest.json' />
+
+  <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
+  <link href='css/materialize.css' type='text/css' rel='stylesheet' media='screen,projection' />
+  <link href='css/style.css' type='text/css' rel='stylesheet' media='screen,projection' />
 </head>
 
 <body>
-  <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-
-      <ul id="nav-mobile" class="sidenav">
-        <li><a href="#">Navbar Link</a></li>
-      </ul>
-      <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+  <nav class='light-blue lighten-1' role='navigation'>
+    <div class='nav-wrapper container'><a id='logo-container' href='#' class='brand-logo'>Busca CEP</a>
     </div>
   </nav>
-  <div class="section no-pad-bot" id="index-banner">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            <li class="tab col s3"><a class="active" href="#cep-tab">CEP</a></li>
-            <li class="tab col s3"><a href="#rua-tab">RUA</a></li>
-            <li class="tab col s3"><a href="#log-tab">LOG</a></li>
+
+  <div class='section no-pad-bot' id='index-banner'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col s12'>
+          <ul class='tabs'>
+            <li class='tab col s3'><a class='active' href='#cep-tab'>CEP</a></li>
+            <li class='tab col s3'><a href='#rua-tab'>RUA</a></li>
+            <li class='tab col s3'><a href='#log-tab'>LOGS</a></li>
           </ul>
         </div>
-        <!-- CONTEUDO DO CEP -->
-        <div id="cep-tab" class="col s12">
-          <h1 class="header adjust-top center orange-text"> Busca CEP</h1>
-          <div class="row center">
-            <h5 class="header adjust-top col s12 light">Consulta de CEP</h5>
-            <!-- INPUT CEP -->
-            <div class="input-field col s12 m6 l3">
-              <i class="material-icons prefix">account_circle</i>
-              <input id="cep" type="text" data-mask="#####-###" class="validate">
-              <label for="cep">CEP</label>
+
+        <div id='cep-tab' class='col s12'>
+          <h1 class='header adjust-top center orange-text'>Busca por CEP</h1>
+          <div class='row center'>
+            <h5 class='header adjust-top col s12 light'>Preencha o CEP para autocompletar</h5>
+            
+            <div class='input-field col s12 m6 l3'>
+              <i class='material-icons prefix'>account_circle</i>
+              <input id='cep' type='text' class='validate' onblur='buscarCep()'>
+              <label for='cep'>CEP</label>
             </div>
-            <!-- INPUT CIDADE  -->
-            <div class="input-field col s12 m6 l3">
-              <i class="material-icons prefix">location_city</i>
-              <input id="cidade" type="text" class="validate active">
-              <label for="cidade">Cidade</label>
+            
+            <div class='input-field col s12 m6 l3'>
+              <i class='material-icons prefix'>location_city</i>
+              <input id='cidade' type='text' class='validate active' readonly>
+              <label for='cidade'>Cidade</label>
             </div>
-            <!-- INPUT BAIRRO  -->
-            <div class="input-field col s12 m6 l3">
-              <i class="material-icons prefix">location_on</i>
-              <input id="bairro" type="text" class="validate active">
-              <label for="bairro">Bairro</label>
+            
+            <div class='input-field col s12 m6 l3'>
+              <i class='material-icons prefix'>location_on</i>
+              <input id='bairro' type='text' class='validate active' readonly>
+              <label for='bairro'>Bairro</label>
             </div>
-            <!-- INPUT ESTADO  -->
-            <div class="input-field col s12 m6 l3">
-              <i class="material-icons prefix">map</i>
-              <input id="estado" type="text" class="validate active">
-              <label for="estado">Estado</label>
+            
+            <div class='input-field col s12 m6 l3'>
+              <i class='material-icons prefix'>map</i>
+              <input id='estado' type='text' class='validate active' readonly>
+              <label for='estado'>Estado</label>
             </div>
-            <!-- INPUT DDD  -->
-            <div class="input-field col s12 m6 l3">
-              <i class="material-icons prefix">local_phone</i>
-              <input id="ddd" type="text" class="validate active">
-              <label for="ddd">DDD</label>
+            
+            <div class='input-field col s12 m6 l3'>
+              <i class='material-icons prefix'>local_phone</i>
+              <input id='ddd' type='text' class='validate active' readonly>
+              <label for='ddd'>DDD</label>
             </div>
 
-            <a onclick="mostrar()" class="waves-effect waves-light btn-small"><i
-                class="material-icons left">search</i>Buscar</a>
-            <a class="waves-effect waves-light btn-small"><i class="material-icons left">clear</i>Limpar</a>
+            <a onclick='buscarCep()' class='waves-effect waves-light btn-small'><i class='material-icons left'>search</i>Buscar</a>
+            <a onclick='limparCamposCep()' class='waves-effect waves-light btn-small'><i class='material-icons left'>clear</i>Limpar</a>
           </div>
-
-
-
         </div>
 
-        <!-- CONTEUDO DA RUA -->
-        <div id="rua-tab" class="col s12">
-          <h1 class="header adjust-top center orange-text"> Busca RUA</h1>
-          <div class="row center">
-            <h5 class="header adjust-top col s12 light">Consulta de Ruas</h5>
-            <!-- INPUT UF -->
-            <div class="input-field col s12 m6 l3">
-              <i style="margin-left: -123px;" class="material-icons prefix">account_circle</i>
-              <select onchange="buscarCidades(this.value)" id="lista-ufs" style="width: 80%;margin-left: 45px;"
-                class="browser-default">
-
+        <div id='rua-tab' class='col s12'>
+          <h1 class='header adjust-top center orange-text'>Busca por Rua</h1>
+          <div class='row center'>
+            <h5 class='header adjust-top col s12 light'>Consulte localidades informando UF, Cidade e Logradouro</h5>
+            
+            <div class='input-field col s12 m8 offset-m2'>
+              <select id='uf-rua' onchange='carregarCidades()'>
+                <option value='' disabled selected>Selecione o Estado</option>
               </select>
+              <label>UF</label>
             </div>
-            <!-- INPUT CIDADE  -->
-            <div class="input-field col s12 m6 l3">
-              <i style="margin-left: -123px;" class="material-icons prefix">location_city</i>
-              <select id="lista-cidades" style="width: 80%;margin-left: 45px;" class="browser-default">
-
+            
+            <div class='input-field col s12 m8 offset-m2'>
+              <select id='cidade-rua'>
+                <option value='' disabled selected>Selecione a Cidade</option>
               </select>
+              <label>MunicÃ­pio</label>
             </div>
-            <!-- INPUT RUA  -->
-            <div class="input-field col s12 m6 l3">
-              <i class="material-icons prefix">location_on</i>
-              <input id="rua" type="text" class="validate active">
-              <label for="rua">Rua</label>
+            
+            <div class='input-field col s12 m8 offset-m2'>
+              <input id='rua' type='text' class='validate'>
+              <label for='rua'>Logradouro (Rua)</label>
             </div>
 
-
-            <a onclick="mostrarRua()" class="waves-effect waves-light btn-small"><i
-                class="material-icons left">search</i>Buscar</a>
-            <a class="waves-effect waves-light btn-small"><i class="material-icons left">clear</i>Limpar</a>
+            <div class='col s12 m8 offset-m2' style='margin-top: 20px;'>
+              <a onclick='buscarRua()' class='waves-effect waves-light btn'><i class='material-icons left'>search</i>Buscar</a>
+            </div>
           </div>
 
-
-          <!-- lista de ruas aqui -->
-          <ul id="lista-ruas" class="collection">
-
-          </ul>
-
+          <ul id='lista-ruas' class='collection'>
+            </ul>
         </div>
 
-        <!-- CONTEUDO DO LOG -->
-        <div id="log-tab" class="col s12">LOG</div>
+        <div id='log-tab' class='col s12'>
+           <h1 class='header adjust-top center orange-text'>Registro de Atividades</h1>
+           <ul id='lista-logs' class='collection'>
+             </ul>
+        </div>
       </div>
-
-
     </div>
   </div>
 
-
-
-  <!--  Scripts CDN-->
-  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.11.0/axios.min.js"
-    integrity="sha512-h9644v03pHqrIHThkvXhB2PJ8zf5E9IyVnrSfZg8Yj8k4RsO4zldcQc4Bi9iVLUCCsqNY0b4WXVV4UB+wbWENA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@hiseb/confetti@2.1.0/dist/confetti.min.js"></script>
-  <script src="https://unpkg.com/imask"></script>
-
-  <!-- Script Locais -->
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/script.js"></script>
-
+  <script src='https://code.jquery.com/jquery-2.1.1.min.js'></script>
+  <script src='js/materialize.js'></script>
+  <script src='js/script.js'></script>
+  <script src='sw.js'></script>
 </body>
 
 </html>
