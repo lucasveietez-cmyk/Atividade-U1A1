@@ -1,0 +1,17 @@
+{
+  "name": "Busca CEP - Meu Projeto",
+  "short_name": "BuscaCEP",
+  "description": "Aplicativo para consulta de endereços via CEP",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#03a9f4",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1048/1048329.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
