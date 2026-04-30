@@ -36,4 +36,4 @@ O deploy foi realizado no Netlify:
 
     Configuração: Defini o nome do domínio nas configurações do site.
 
-    Link final: https://69f29e901c461b4574bd6e3b--kaleidoscopic-brigadeiros-72aafa.netlify.app/
+    Link final: https://69f2a54f437b8c476f557730--buscacepp-lucas-nr.netlify.app/
